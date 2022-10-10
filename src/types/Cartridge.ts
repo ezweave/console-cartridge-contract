@@ -1,7 +1,13 @@
 import { Logger } from './Logger';
+import { Operation } from './Operation';
 
 export interface Cartridge {
   name: string,
-  operations: [],
+  operations: Operation<
+    unknown,
+    unknown,
+    unknown,
+    unknown
+  >[],
   logger: Logger
 }
