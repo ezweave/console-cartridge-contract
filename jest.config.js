@@ -25,7 +25,6 @@ module.exports = {
   moduleDirectories: ['node_modules'],
   moduleNameMapper,
   rootDir: 'src',
-  setupFilesAfterEnv: ['./test/setup.ts'],
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },

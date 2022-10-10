@@ -1,2 +1,1 @@
-export * from './mockarooGet';
-export * from './mockarooPost';
+export * from './mockarooHTTPClient';

@@ -1,14 +1,16 @@
+import { httpGet } from '@console-cartridge-contract/util/io';
+
 import { transformOffersOperationRequest } from './transformOffersOperationRequest';
 import { transformOffersOperationResponse } from './transformOffersOperationResponse';
 
-import { PurchaseOperation } from '../../types/operations/PurchaseOperation';
-import { mockarooGet } from '../io';
+import { OffersOperation } from '../../types/operations';
+import { mockarooHTTPClient } from '../io';
 
-export const offersOperation: PurchaseOperation = {
-  name: 'PurchaseOperation',
+export const offersOperation: OffersOperation = {
+  name: 'OffersOperation',
   steps: [
     {
-      operation: (_n) => mockarooGet('relative/path'),
+      operation: httpGet(mockarooHTTPClient),
       transform: {
         request: transformOffersOperationRequest,
         response: transformOffersOperationResponse,

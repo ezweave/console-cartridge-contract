@@ -14,8 +14,8 @@ export interface PurchaseOperation
     {
       operation: (n) => Promise<string>;
       transform: {
-        request: (n) => string;
-        response: (n) => PetShopPurchaseResponse;
+        request: (...n) => string;
+        response: (id) => (string) => PetShopPurchaseResponse;
       };
     },
   ];

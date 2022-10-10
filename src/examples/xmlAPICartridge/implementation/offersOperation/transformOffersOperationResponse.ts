@@ -1,11 +1,14 @@
 import { flow } from 'lodash';
 import { unfuxml } from 'unfuxml';
+import { get as getFP } from 'lodash/fp';
 
-import { PetShopPurchaseResponse } from '../../types/data';
-
+import { PetShopInventoryItem } from '../../types/data';
 export interface TransformOffersOperationResponse {
-  (string): PetShopPurchaseResponse;
+  (string): PetShopInventoryItem[];
 }
 
 export const transformOffersOperationResponse: TransformOffersOperationResponse =
-  flow(unfuxml, (_xml) => ({} as PetShopPurchaseResponse));
+  flow(
+    unfuxml,
+    getFP('products', []),
+  );
