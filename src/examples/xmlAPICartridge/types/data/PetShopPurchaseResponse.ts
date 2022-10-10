@@ -1,4 +1,4 @@
 export interface PetShopPurchaseResponse {
-  id: string,
-  total: string,
+  id: string;
+  total: string;
 }

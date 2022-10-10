@@ -1,1 +1,1 @@
-export * from './XMLAPICartridge';
+export * from './PetShoppingSupplier';
