@@ -16,10 +16,12 @@ exports[`transformPurchaseOperationRequest generates an xml payload for our purc
     <product>
   <sku>61b04f7f-2682-4206-b2e1-0711537073a6</sku>
   <quantity>1</quantity>
-</product>,<product>
-  <sku>9816f1be-554d-11ed-bdc3-0242ac120002</sku>
+</product>
+<product>
+  <sku>d188d07a-1e5a-4afc-a481-1eb1450da38f</sku>
   <quantity>3</quantity>
-</product>,<product>
+</product>
+<product>
   <sku>9816f1be-554d-11ed-bdc3-0242ac120002</sku>
   <quantity>1</quantity>
 </product>

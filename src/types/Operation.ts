@@ -19,16 +19,10 @@ interface IOWithTransformation<InputType, OutputType, RequestType, ResponseType>
 
 export interface Operation<InputType, RequestType, ResponseType, OutputType> {
   name: String;
-  steps: IOWithTransformation<InputType, OutputType, RequestType, ResponseType>[];
+  steps: IOWithTransformation<
+    InputType,
+    OutputType,
+    RequestType,
+    ResponseType
+  >[];
 }
-
-const op: Operation<any, any, any, any> = {
-  name: 'adsfd',
-  steps: [{
-    operation: async () => 'foo',
-    transform: {
-      request: () => { },
-      response: () => { }
-    }
-  }]
-};

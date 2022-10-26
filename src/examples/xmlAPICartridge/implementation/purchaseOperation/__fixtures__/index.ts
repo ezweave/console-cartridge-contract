@@ -8,7 +8,7 @@ export const fancyCatCollarFixture: PetShopInventoryItem = {
 };
 
 export const canOfFreshDogKibbleFixture: PetShopInventoryItem = {
-  sku: '9816f1be-554d-11ed-bdc3-0242ac120002',
+  sku: 'd188d07a-1e5a-4afc-a481-1eb1450da38f',
   description: 'Fresh meat from ROUSes, banthas, and womprats',
   name: 'Fresh Dog Kibble',
   price: '20.99',

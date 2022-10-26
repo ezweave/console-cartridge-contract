@@ -1,4 +1,4 @@
-import { map } from 'lodash';
+import { join, map } from 'lodash';
 
 import { PetShopPurchaseItem, PetShopPurchaseRequest } from '../../types/data';
 
@@ -20,7 +20,7 @@ export const transformPurchaseOperationRequest = ({
 <purchase>
   <id>${id}</id>
   <products>
-    ${map(items, generateProductPurchaseElementFromItem)}
+    ${join(map(items, generateProductPurchaseElementFromItem), '\n')}
   </products>
 </purchase>
 `;
