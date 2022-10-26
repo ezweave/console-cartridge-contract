@@ -1,7 +1,7 @@
 import { httpPost } from '@console-cartridge-contract/util/io';
 
-import { transformOffersOperationRequest } from './transformOffersOperationRequest';
-import { transformOffersOperationResponse } from './transformOffersOperationResponse';
+import { transformPurchaseOperationRequest } from './transformPurchaseOperationRequest';
+import { transformPurchaseOperationResponse } from './transformPurchaseOperationResponse';
 
 import { PurchaseOperation } from '../../types/operations';
 import { mockarooHTTPClient } from '../io';
@@ -10,10 +10,11 @@ export const purchaseOperation: PurchaseOperation = {
   name: 'PurchaseOperation',
   steps: [
     {
-      operation: httpPost(mockarooHTTPClient),
+      operation: (data: string) =>
+        httpPost(mockarooHTTPClient)('/purchase', data),
       transform: {
-        request: transformOffersOperationRequest,
-        response: transformOffersOperationResponse,
+        request: transformPurchaseOperationRequest,
+        response: transformPurchaseOperationResponse,
       },
     },
   ],

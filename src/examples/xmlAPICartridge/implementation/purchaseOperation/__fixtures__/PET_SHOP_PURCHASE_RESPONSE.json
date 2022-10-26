@@ -1,0 +1,25 @@
+{
+  "purchase": {
+    "products": {
+      "product": [
+        {
+          "name": "Rhinestone Cat Collar",
+          "sku": "61b04f7f-2682-4206-b2e1-0711537073a6",
+          "price": 12.99,
+          "quantity": 1
+        },
+        {
+          "name": "Alexander McQueen Dog Tuxedo",
+          "sku": "9816f1be-554d-11ed-bdc3-0242ac120002",
+          "price": 1900.99,
+          "quantity": 1
+        }
+      ],
+      "_text": ","
+    },
+    "tax": 114.72,
+    "total": 1912,
+    "id": 1234,
+    "traceId": "our-trace-id"
+  }
+}

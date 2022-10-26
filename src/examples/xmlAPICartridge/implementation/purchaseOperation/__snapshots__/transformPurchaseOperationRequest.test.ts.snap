@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateProductPurchaseElementFromItem generates an xml element to correspond to our purchase item 1`] = `
+"<product>
+  <sku>61b04f7f-2682-4206-b2e1-0711537073a6</sku>
+  <quantity>1</quantity>
+</product>"
+`;
+
+exports[`transformPurchaseOperationRequest generates an xml payload for our purchase 1`] = `
+"
+<?xml version='1.0' encoding='UTF-8'?>
+<purchase>
+  <id>our-transaction-id</id>
+  <products>
+    <product>
+  <sku>61b04f7f-2682-4206-b2e1-0711537073a6</sku>
+  <quantity>1</quantity>
+</product>,<product>
+  <sku>9816f1be-554d-11ed-bdc3-0242ac120002</sku>
+  <quantity>3</quantity>
+</product>,<product>
+  <sku>9816f1be-554d-11ed-bdc3-0242ac120002</sku>
+  <quantity>1</quantity>
+</product>
+  </products>
+</purchase>
+"
+`;

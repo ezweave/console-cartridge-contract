@@ -12,10 +12,10 @@ export interface PurchaseOperation
   name: 'PurchaseOperation';
   steps: [
     {
-      operation: (n) => Promise<string>;
+      operation: (string) => Promise<string>;
       transform: {
         request: (...n) => string;
-        response: (id) => (string) => PetShopPurchaseResponse;
+        response: (string) => PetShopPurchaseResponse;
       };
     },
   ];
