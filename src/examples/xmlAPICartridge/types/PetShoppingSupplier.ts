@@ -1,7 +1,10 @@
 import { Cartridge } from '@console-cartridge-contract/types';
 
-import { OffersOperation } from './operations';
+import { OffersOperation, PurchaseOperation } from './operations';
 
 export interface PetShoppingSupplier extends Cartridge {
-  operations: [OffersOperation];
+  operations: [
+    OffersOperation,
+    PurchaseOperation
+  ];
 }
