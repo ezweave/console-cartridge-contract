@@ -69,9 +69,61 @@ So, let's come up with a single problem statement:
 
 Ahh... such a lofty goal!
 
-Remember, the old ["Iron Triangle"](https://www.freecodecamp.org/news/the-iron-triangle-or-pick-two/) of software..
+Remember, the old ["Iron Triangle"](https://www.freecodecamp.org/news/the-iron-triangle-or-pick-two/) of software. While there are valid arguments describing this model as "overly-simplistic" it is still a reality of engineering. Cost, quality, or speed. Pick two.
 
-TODO: 10/27/2022 this is where Weaver left off.
+<p align="center">
+  <img width="600" src="./docs/img/software_triangle.png">
+</p>
+
+Software is _expensive_ and with over fifty years of analysis of software, it turns out that the _most expensive_ part of software is maintenance.
+
+> Software maintenance is defined in the IEEE Standard for Software Maintenance (IEEE 14764-2006 - ISO/IEC) as the modification of a software product after delivery to correct faults, to improve performance or other attributes, or to adapt the product to a modified environment. It lasts for the lifespan of the software and requires careful logging and tracking of change requests as per the guidelines for change management set out at the end of the requirements phase.
+
+[_Software Maintenance_ on ScienceDirect](https://www.sciencedirect.com/topics/computer-science/software-maintenance)
+
+More specifically, the discpline of Software Engineering arose as an attempt to reduce these not insubstantial costs:
+
+> Large software programs are usually long lived and continually evolve. Substantial maintenance effort is often extended by engineers trying to understand the software prior to making changes. To successfully evolve the software, a thorough understanding of the architect's intentions about software organization is required. Software maintenance costs can be reduced significantly if the software architecture is well defined, clearly documented, and creates an environment that promotes design consistency through the use of guidelines and design patterns. Building a maintainable system depends upon the consistent application of these architectural practices.
+
+[_Reducing maintenance costs through the application of modern software architecture principles_ from ACM SIGAda](https://dl.acm.org/doi/10.1145/319295.319311)
+
+_Object Oriented Programming_, _Object Oriented Design_, _Design Patterns_, _Test Driven Development_, are all concepts that arose in an attempt to address these deficiencies.
+
+To be fair, this is a moving target. What seems like a good solution in 2022, may seem antiquated in 2040.
+
+OOP has had a parcticularly long life, with regards to design paradigms. It arose in the eighties and came to prominence in the 90s and aughts, with the rise in popularity of C-family languages that supported it: C++, C#, Java, Objective-C, etc.
+
+JavaScript, on the other hand, isn't really an OO language. It barely has OO features, but that is another story.
+
+Even advocates of OOP were critical of the wildfire way in which it spread and today, there are countless legacy systems that are built on J2EE/JE/Jakarta (same technology, the name has changed) stacks that probably won't go anywhere.
+
+But OOP has let us down and in 2022 it has become quite obvious:
+
+> OOP is considered by many to be the crown jewel of computer science. The ultimate solution to code organization. The end to all our problems. The only true way to write our programs. Bestowed upon us by the one true God of programming himself…
+
+> Until…it’s not, and people start succumbing under the weight of abstractions, and the complex graph of promiscuously shared mutable objects. Precious time and brainpower are being spent thinking about “abstractions” and “design patterns” instead of solving real-world problems.
+
+[_Object-Oriented Programming — The Trillion Dollar Disaster_](https://betterprogramming.pub/object-oriented-programming-the-trillion-dollar-disaster-92a4b666c7c7)
+
+As an exercise for the reader, you can find countless articles from all segments of the software world ridiculing just how insidious the OO paradigm has become... and how it's failed.
+
+Now _functional programming_ (which predates OO) has been growing in popularity with the rise of Node.js, JavaScript (and libraries like `lodash`), Scala, F#, etc. Is it just another bit of snake oil?
+
+Perhaps. But quite a few folks believe that it addresses and better decomposes concepts that OO tries to mask. A clever Redditor had a very succinct way of describing this:
+
+> OOP as a paradigm incentivizes code obfuscation (which is for some reason confused with abstraction), while [functional programming] tends to make things as explicit as possible…
+
+[r/programming](https://www.reddit.com/r/programming/comments/cblhk1/comment/etjwaqy/?utm_source=share&utm_medium=web2x&context=3)
+
+The Console-Cartridge concept is an attempt to encourage FP design with a modular architecture that holds true to this concept. We expose crucial steps and _isolate_ side effects.
+
+To be clear, let's talk about that.
+
+A _side effect_, in functional terms, is a function that may not return something, but the key feature is that it relies on a _non-deterministic_ resource. Typically this is IO. Things like HTTP calls or queries to an RDBMS that rely on networking, etc. The `Cartridge` design attempts to encourage developers to isolate _side effect_ functions and design around _deterministic_ behavior.
+
+We elaborate on this in the sections on [`Cartridge`](#example-cartridge) and the [counter example](#cartridge-counter-example).
+
+[Top](#table-of-contents)
 
 ## Is It A Design Pattern?
 
