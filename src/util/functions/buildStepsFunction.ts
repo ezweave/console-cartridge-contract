@@ -25,16 +25,10 @@ export const buildStepFunctionsFromOperation = (
     return response;
   });
 
-interface BuildStepsFunction {
-  (op: Operation<any, any, any, any>, log?: Logger): (
-    input?: any,
-  ) => Promise<any>;
-}
-
-export const buildStepsFunction: BuildStepsFunction = (
-  op,
-  log = console.info,
-) => {
+export const buildStepsFunction = <InputType, OutputType>(
+  op: Operation<InputType, any, any, OutputType>,
+  log: Logger = console.info,
+): ((input?: InputType) => Promise<OutputType>) => {
   const stepFunctions = buildStepFunctionsFromOperation(op, log);
   return flow(stepFunctions);
 };
