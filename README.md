@@ -173,7 +173,7 @@ At first blush, this does seem akin to a simple _facade_, yet there are some det
 
 In the included example, we have a `Cartridge` designed around a `PetShoppingSupplier`. At this level, you (as a system designer) would implement a `Cartridge` that encapsulates cueing (commands), inputs, and outputs toe the `Console`. E.g. you want an interface that can be coded to for any given Pet Store we would want to interact with.
 
-[`src/examples/xmlAPICartridge/types/PetShoppingSupplier.ts`](src/examples/xmlAPICartridge/types/PetShoppingSupplier.ts)
+[`src/examples/cartridge/shopping/types/PetShoppingSupplier.ts`](src/examples/cartridge/shopping/types/PetShoppingSupplier.ts)
 
 ```ts
 import { Cartridge } from '@console-cartridge-contract/types';
@@ -189,7 +189,7 @@ Every `Cartridge`, be it for PetCo, Chewy, etc, would be written to support this
 
 The two key pieces here are the `operations`.
 
-[`src/examples/xmlAPICartridge/types/operations/OffersOperation.ts`](src/examples/xmlAPICartridge/types/operations/OffersOperation.ts)
+[`src/examples/cartridge/shopping/types/operations/OffersOperation.ts`](src/examples/cartridge/shopping/types/operations/OffersOperation.ts)
 
 ```ts
 export interface OffersOperation
@@ -221,13 +221,13 @@ In most cases, we would expect a set of `transform` operations, but we do allow 
 
 If we look at the _implementation_ of a `PetShoppingSupplier`, particularly an `operation`, we can see this more clearly.
 
-[`src/examples/xmlAPICartridge/implementation/mockarooPetShoppingCartridge.ts`](src/examples/xmlAPICartridge/implementation/mockarooPetShoppingCartridge.ts)
+[`src/examples/cartridge/shopping/suppliers/mockaroo/mockarooPetShoppingCartridge.ts`](src/examples/cartridge/shopping/suppliers/mockaroo/mockarooPetShoppingCartridge.ts)
 
 ```ts
 import { offersOperation } from './offersOperation';
 import { purchaseOperation } from './purchaseOperation/purchaseOperation';
 
-import { PetShoppingSupplier } from '../types';
+import { PetShoppingSupplier } from '@console-cartridge-contract/examples/cartridge/shopping/types';
 
 export const mockarooPetShoppingCartridge: PetShoppingSupplier = {
   name: 'Mockaroo',
@@ -238,7 +238,7 @@ export const mockarooPetShoppingCartridge: PetShoppingSupplier = {
 
 This cartridge adds a mild amount of detail/decoration to the functions it implements. This is mostly to provide things like a universal logger, etc.
 
-[`src/examples/xmlAPICartridge/implementation/offersOperation/offersOperation.ts`](src/examples/xmlAPICartridge/implementation/offersOperation/offersOperation.ts)
+[`src/examples/cartridge/shopping/suppliers/mockaroo/offersOperation/offersOperation.ts`](src/examples/cartridge/shopping/suppliers/mockaroo/offersOperation/offersOperation.ts)
 
 ```ts
 import { httpGet } from '@console-cartridge-contract/util/io';
@@ -246,7 +246,7 @@ import { httpGet } from '@console-cartridge-contract/util/io';
 import { transformOffersOperationRequest } from './transformOffersOperationRequest';
 import { transformOffersOperationResponse } from './transformOffersOperationResponse';
 
-import { OffersOperation } from '../../types/operations';
+import { OffersOperation } from '@console-cartridge-contract/examples/cartridge/shopping/types/operations';
 import { mockarooHTTPClient } from '../io';
 
 export const offersOperation: OffersOperation = {
@@ -277,7 +277,7 @@ export const httpGet =
 
 If we look at the `transformOffersOperationRequest` function, we can see how this is provided:
 
-[`src/examples/xmlAPICartridge/implementation/offersOperation/transformOffersOperationRequest.ts`](src/examples/xmlAPICartridge/implementation/offersOperation/transformOffersOperationRequest.ts)
+[`src/examples/cartridge/shopping/suppliers/mockaroo/offersOperation/transformOffersOperationRequest.ts`](src/examples/cartridge/shopping/suppliers/mockaroo/offersOperation/transformOffersOperationRequest.ts)
 
 ```ts
 interface GetRequestTransformer<InputType> {
@@ -293,7 +293,7 @@ We can see that all it is doing is taking in a `category` (which would come from
 
 For symmetry, we can see how this is then transformed into a shape our system prefers:
 
-[src/examples/xmlAPICartridge/implementation/offersOperation/transformOffersOperationResponse.ts`](src/examples/xmlAPICartridge/implementation/offersOperation/transformOffersOperationResponse.ts)
+[`src/examples/cartridge/shopping/suppliers/mockaroo/offersOperation/transformOffersOperationResponse.ts`](src/examples/cartridge/shopping/suppliers/mockaroo/offersOperation/transformOffersOperationResponse.ts)
 
 ```ts
 export interface TransformOffersOperationResponse {

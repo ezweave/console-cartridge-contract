@@ -1,7 +1,8 @@
+import { PetShoppingSupplier } from '@console-cartridge-contract/examples/cartridge/shopping/types';
+
 import { offersOperation } from './offersOperation';
 import { purchaseOperation } from './purchaseOperation/purchaseOperation';
 
-import { PetShoppingSupplier } from '../types';
 
 export const mockarooPetShoppingCartridge: PetShoppingSupplier = {
   name: 'Mockaroo',

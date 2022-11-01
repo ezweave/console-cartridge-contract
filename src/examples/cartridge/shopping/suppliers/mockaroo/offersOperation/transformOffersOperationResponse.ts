@@ -1,7 +1,7 @@
 import { flow, get } from 'lodash';
 import { unfuxml } from 'unfuxml';
 
-import { PetShopInventoryItem } from '../../types/data';
+import { PetShopInventoryItem } from '@console-cartridge-contract/examples/cartridge/shopping/types/data';
 export interface TransformOffersOperationResponse {
   (string): PetShopInventoryItem[];
 }

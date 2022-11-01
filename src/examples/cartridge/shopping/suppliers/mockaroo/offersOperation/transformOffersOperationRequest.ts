@@ -1,4 +1,4 @@
-import { PetShopCategory } from '../../types/data';
+import { PetShopCategory } from '@console-cartridge-contract/examples/cartridge/shopping/types/data';
 
 // TODO: make this have a concrete return type or interface type
 interface GetRequestTransformer<InputType> {

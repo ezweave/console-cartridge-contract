@@ -1,9 +1,9 @@
+import { PurchaseOperation } from '@console-cartridge-contract/examples/cartridge/shopping/types/operations';
 import { httpPost } from '@console-cartridge-contract/util/io';
 
 import { transformPurchaseOperationRequest } from './transformPurchaseOperationRequest';
 import { transformPurchaseOperationResponse } from './transformPurchaseOperationResponse';
 
-import { PurchaseOperation } from '../../types/operations';
 import { mockarooHTTPClient } from '../io';
 
 export const purchaseOperation: PurchaseOperation = {

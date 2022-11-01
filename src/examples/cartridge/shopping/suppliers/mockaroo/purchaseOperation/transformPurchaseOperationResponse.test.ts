@@ -5,7 +5,7 @@ import {
   transformPurchaseOperationResponse,
 } from './transformPurchaseOperationResponse';
 
-import { PetShopPurchaseResponse } from '../../types/data';
+import { PetShopPurchaseResponse } from '../../../types/data';
 
 const petShopPurchaseOperationResponse: PetShopPurchaseResponse = {
   id: 'our-trace-id',

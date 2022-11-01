@@ -1,9 +1,9 @@
+import { OffersOperation } from '@console-cartridge-contract/examples/cartridge/shopping/types/operations';
 import { httpGet } from '@console-cartridge-contract/util/io';
 
 import { transformOffersOperationRequest } from './transformOffersOperationRequest';
 import { transformOffersOperationResponse } from './transformOffersOperationResponse';
 
-import { OffersOperation } from '../../types/operations';
 import { mockarooHTTPClient } from '../io';
 
 export const offersOperation: OffersOperation = {

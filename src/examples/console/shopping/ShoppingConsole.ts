@@ -1,5 +1,5 @@
-import { PetShoppingSupplier } from '@console-cartridge-contract/examples/xmlAPICartridge/types';
-import { PetShopInventoryItem } from '@console-cartridge-contract/examples/xmlAPICartridge/types/data';
+import { PetShoppingSupplier } from '@console-cartridge-contract/examples/cartridge/shopping/types';
+import { PetShopInventoryItem } from '@console-cartridge-contract/examples/cartridge/shopping/types/data';
 import { buildStepsFunction } from '@console-cartridge-contract/util/functions';
 
 interface PetShopConsole {

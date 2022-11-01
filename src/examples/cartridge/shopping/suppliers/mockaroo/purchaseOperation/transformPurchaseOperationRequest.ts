@@ -1,6 +1,9 @@
 import { join, map } from 'lodash';
 
-import { PetShopPurchaseItem, PetShopPurchaseRequest } from '../../types/data';
+import {
+  PetShopPurchaseItem,
+  PetShopPurchaseRequest,
+} from '@console-cartridge-contract/examples/cartridge/shopping/types/data';
 
 export const generateProductPurchaseElementFromItem = ({
   quantity,

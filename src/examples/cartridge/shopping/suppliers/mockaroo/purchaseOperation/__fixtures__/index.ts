@@ -1,4 +1,4 @@
-import { PetShopInventoryItem } from '@console-cartridge-contract/examples/xmlAPICartridge/types/data';
+import { PetShopInventoryItem } from '@console-cartridge-contract/examples/cartridge/shopping/types/data';
 
 export const fancyCatCollarFixture: PetShopInventoryItem = {
   sku: '61b04f7f-2682-4206-b2e1-0711537073a6',

@@ -1,6 +1,6 @@
 import { map, reduce } from 'lodash';
 
-import { PetShopInventoryItem } from '@console-cartridge-contract/examples/xmlAPICartridge/types/data';
+import { PetShopInventoryItem } from '@console-cartridge-contract/examples/cartridge/shopping/types/data';
 
 import { dogTuxedoFixture, fancyCatCollarFixture } from '.';
 
