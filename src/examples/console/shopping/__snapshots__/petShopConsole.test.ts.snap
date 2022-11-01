@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getPetShopConsole loads the correct cartridge 1`] = `
+Object {
+  "listInventory": [Function],
+}
+`;
+
+exports[`listInventory loads a pet shop cartridge and calls the correct operation 1`] = `
+Object {
+  "description": "Dog Chew Toy",
+  "name": "Dog Toy",
+  "price": 10,
+  "sku": "PET-BB-PUR-01",
+}
+`;
