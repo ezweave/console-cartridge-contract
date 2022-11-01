@@ -6,14 +6,10 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/**/*.ts',
-    '!<rootDir>/types/**/*.ts',
+    '!<rootDir>**/types/**/*.ts',
     '!<rootDir>/**/index.ts',
-    '!<rootDir>/**/*.spec.ts',
     '!<rootDir>/**/*.test.ts',
-    '!<rootDir>/__fixtures__/**/*.ts',
-    '!<rootDir>/test/**/*.ts',
-    '!<rootDir>/tools/search/**/*.ts',
-    '!<rootDir>/utilities/minio-docker.ts',
+    '!<rootDir>/**/__fixtures__/**/*.ts',
   ],
   coverageThreshold: {
     global: {
