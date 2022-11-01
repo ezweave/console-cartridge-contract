@@ -1,5 +1,6 @@
-import { AxiosInstance } from "axios";
-import { httpPost } from "./httpPost";
+import { AxiosInstance } from 'axios';
+
+import { httpPost } from './httpPost';
 
 describe(httpPost, () => {
   it('returns data from a response', async () => {
@@ -11,5 +12,5 @@ describe(httpPost, () => {
     const post = httpPost(mockClient);
 
     expect(await post(path, JSON.stringify(data))).toEqual(data);
-  })
-})
+  });
+});

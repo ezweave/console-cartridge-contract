@@ -1,5 +1,6 @@
-import { AxiosInstance } from "axios";
-import { httpGet } from "./httpGet";
+import { AxiosInstance } from 'axios';
+
+import { httpGet } from './httpGet';
 
 describe(httpGet, () => {
   it('returns data from a response', async () => {
@@ -11,5 +12,5 @@ describe(httpGet, () => {
     const get = httpGet(mockClient);
 
     expect(await get(path)).toEqual(data);
-  })
-})
+  });
+});

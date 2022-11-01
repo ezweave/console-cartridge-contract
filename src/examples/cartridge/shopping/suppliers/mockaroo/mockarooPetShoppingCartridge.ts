@@ -3,7 +3,6 @@ import { PetShoppingSupplier } from '@console-cartridge-contract/examples/cartri
 import { offersOperation } from './offersOperation';
 import { purchaseOperation } from './purchaseOperation/purchaseOperation';
 
-
 export const mockarooPetShoppingCartridge: PetShoppingSupplier = {
   name: 'Mockaroo',
   logger: console.log,
