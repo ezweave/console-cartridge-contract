@@ -44,6 +44,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
+    "build:dist": "yarn clean && yarn lint && tsc --project tsconfig.dist.json",
     "build": "yarn lint && tsc",
     "clean:reset": "rm -rf node_modules && yarn",
     "clean": "rm -rf dist",
