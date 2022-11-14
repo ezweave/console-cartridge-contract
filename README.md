@@ -9,7 +9,7 @@ A design pattern to help separate implemenation details from execution.
 ## Table of Contents
 
 - [Introduction](#introduction)
-  - [Problem Statement]()
+  - [Problem Statement](#problem-statement)
 - [Is It A Design Pattern](#is-it-a-design-pattern)
 - [Lexicon](#lexicon)
   - [Cartridge](#cartridge)
@@ -60,8 +60,14 @@ First, we certainly believe that FP practices improve the maintainability and de
   - Deterministic functions are things we _should_ be able to control... e.g. data from an `HttpResponse` in a given shape, should always transform to the same shape when we call a transformer.
 - Break up code into smaller, easier to test functions.
 - Avoid wildly differing implementations or, at least, wildly different on a macro level (e.g. one function does everything, etc. See the ["Counter Example"](#cartridge-counter-example) for more).
+- Avoid creating an elaborate framework, which requires maintenance.
 
 We also want to make it easy for our teams and team members to succeed. We want them to have pride in building well designed and tested systems.
+
+Crucially, the last bullet is paramount. Your author has seen lots of "invented here" frameworks built over the last twenty years and they tend to be:
+
+- _Non-idiomatic._ Meaning that they invent some new pattern or paradigm on top of a language (and its SDK).
+- _Maintenance nightmares._ The folks that wrote it originally are rarely the ones who support it and _often_ become its greatest critics because "they know where the bodies are buried". The road to hell and all that rot.
 
 So, let's come up with a single problem statement:
 
@@ -107,7 +113,7 @@ But OOP has let us down and in 2022 it has become quite obvious:
 
 As an exercise for the reader, you can find countless articles from all segments of the software world ridiculing just how insidious the OO paradigm has become... and how it's failed.
 
-Now _functional programming_ (which predates OO) has been growing in popularity with the rise of Node.js, JavaScript (and libraries like `lodash`), Scala, F#, etc. Is it just another bit of snake oil?
+Now _functional programming_ (which predates OO) has been growing in popularity with the rise of Haskell, Node.js, JavaScript (and libraries like `lodash`), Scala, F#, etc. Is it just another bit of snake oil?
 
 Perhaps. But quite a few folks believe that it addresses and better decomposes concepts that OO tries to mask. A clever Redditor had a very succinct way of describing this:
 
@@ -396,6 +402,62 @@ The `Cartridge` pattern does not completely prevent this. A bad actor could stil
 [Top](#table-of-contents)
 
 ### Console
+
+As you navigate through the code examples in this project, one thing probably stands out: where's the type for a `Console`?
+
+If you skip back to our [**Problem Statement**](#problem-statement) you may recall your authors assertion:
+
+> Avoid creating an elaborate framework, which requires maintenance.
+
+We brainstormed ideas on how to pattern a `Console`, but ultimately it felt like attempting to wrap a type around the "machinery" is a risky proposition.
+
+Either we make it so wide open that it is utterly pointless or we end up writing a great deal of "framework" or "middleware" that is going to need maintenance and some grokkability, _et cetera_ _et cetera_.
+
+The `Console` is merely an abstraction, effectively an _orchestration layer_. What that layer looks like depends entirely upon your use case.
+
+_Ideally_, the `Console` is something that you write once and only revisit on occasion. You are free to spend the bulk of your time writing new `Cartridge` implementations.
+
+Ideally your `Console` is:
+
+- _Fault tolerant._ It should handle `Cartridge` operations and fail gracefully.
+- _Agnostic._ The whole purpose of the `Cartridge` is to abstract business logic from the mechanisms to execute that logic.
+
+Example `Console`s:
+
+- A REST API that combines operations of other systems (via `Cartridge`s).
+- A UI that has some modular logic based on what systems it works with.
+
+In our code, we provide a very simple `Console` example, under [`src/examples/console/shopping/petShopConsole.ts`](src/examples/console/shopping/petShopConsole.ts):
+
+```ts
+interface PetShopConsole {
+  listInventory: () => Promise<PetShopInventoryItem[]>;
+}
+
+export const getPetShopConsole = (
+  suppiler: PetShoppingSupplier,
+): PetShopConsole => ({
+  listInventory: listInventory(suppiler),
+});
+
+export const listInventory = (supplier: PetShoppingSupplier) => async () => {
+  const {
+    logger,
+    name,
+    operations: [offersOperation],
+  } = supplier;
+
+  logger('Loading cartridge', name);
+
+  return buildStepsFunction(offersOperation)();
+};
+```
+
+It has _one_ operation that simply exercises a `Cartridge`. This may be all that your `Console` needs to do.
+
+You probably also notice that there's _one_ function that is about as much framework/middleware as we're willing to offer, `buildStepsFunction`.
+
+### A Tiny Bit of Framework
 
 [Top](#table-of-contents)
 

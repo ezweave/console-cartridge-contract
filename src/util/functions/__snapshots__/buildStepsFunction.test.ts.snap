@@ -3,11 +3,110 @@
 exports[`buildStepFunctionsFromOperation builds step functions with transformers 1`] = `
 Array [
   [Function],
+  [Function],
 ]
 `;
 
 exports[`buildStepFunctionsFromOperation builds step functions without a transformer 1`] = `
 Array [
   [Function],
+]
+`;
+
+exports[`buildStepsFunction compiles multiple steps with transformers into one function 1`] = `
+Object {
+  "instrument": "LEAD_GUITAR",
+  "name": "George",
+  "vocals": "BACKGROUND",
+}
+`;
+
+exports[`buildStepsFunction logs all of the steps along the way 1`] = `
+Array [
+  Array [
+    "transformerOperation-step-1-request-transformer",
+    "input",
+    Object {
+      "name": "Ringo",
+    },
+  ],
+  Array [
+    "transformerOperation-step-1-request-transformer",
+    "output",
+    "{\\"name\\":\\"Ringo\\"}",
+  ],
+  Array [
+    "transformerOperation-step-1-operation",
+    "input",
+    Object {
+      "name": "Ringo",
+    },
+  ],
+  Array [
+    "transformerOperation-step-1-operation",
+    "output",
+    Object {
+      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\"}",
+    },
+  ],
+  Array [
+    "transformerOperation-step-1-response-transformer",
+    "input",
+    Object {
+      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\"}",
+    },
+  ],
+  Array [
+    "transformerOperation-step-1-response-transformer",
+    "output",
+    Object {
+      "instrument": "DRUMS",
+      "name": "Ringo",
+    },
+  ],
+  Array [
+    "transformerOperation-step-2-request-transformer",
+    "input",
+    Object {
+      "instrument": "DRUMS",
+      "name": "Ringo",
+    },
+  ],
+  Array [
+    "transformerOperation-step-2-request-transformer",
+    "output",
+    "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\"}",
+  ],
+  Array [
+    "transformerOperation-step-2-operation",
+    "input",
+    Object {
+      "instrument": "DRUMS",
+      "name": "Ringo",
+    },
+  ],
+  Array [
+    "transformerOperation-step-2-operation",
+    "output",
+    Object {
+      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\",\\"vocals\\":\\"RINGO\\"}",
+    },
+  ],
+  Array [
+    "transformerOperation-step-2-response-transformer",
+    "input",
+    Object {
+      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\",\\"vocals\\":\\"RINGO\\"}",
+    },
+  ],
+  Array [
+    "transformerOperation-step-2-response-transformer",
+    "output",
+    Object {
+      "instrument": "DRUMS",
+      "name": "Ringo",
+      "vocals": "RINGO",
+    },
+  ],
 ]
 `;
