@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`buildStepFunctionsFromOperation builds step functions with transformers 1`] = `
+Array [
+  [Function],
+  [Function],
+]
+`;
+
+exports[`buildStepFunctionsFromOperation builds step functions without a transformer 1`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`buildStepsFunction compiles multiple steps with transformers into one function 1`] = `
+Object {
+  "color": "PURPLE",
+  "name": "Donatello",
+  "weapon": "BO",
+}
+`;
+
+exports[`buildStepsFunction logs all of the steps along the way 1`] = `
+Array [
+  Array [
+    "getNinjaTurtleInfo-step-1-request-transformer",
+    "input",
+    Object {
+      "name": "Michaelangelo",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-1-request-transformer",
+    "output",
+    "{\\"name\\":\\"Michaelangelo\\"}",
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-1-operation",
+    "input",
+    Object {
+      "name": "Michaelangelo",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-1-operation",
+    "output",
+    Object {
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\"}",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-1-response-transformer",
+    "input",
+    Object {
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\"}",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-1-response-transformer",
+    "output",
+    Object {
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-2-request-transformer",
+    "input",
+    Object {
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-2-request-transformer",
+    "output",
+    "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\"}",
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-2-operation",
+    "input",
+    Object {
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-2-operation",
+    "output",
+    Object {
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\",\\"color\\":\\"ORANGE\\"}",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-2-response-transformer",
+    "input",
+    Object {
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\",\\"color\\":\\"ORANGE\\"}",
+    },
+  ],
+  Array [
+    "getNinjaTurtleInfo-step-2-response-transformer",
+    "output",
+    Object {
+      "color": "ORANGE",
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
+    },
+  ],
+]
+`;

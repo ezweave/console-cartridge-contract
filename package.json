@@ -1,15 +1,18 @@
 {
   "name": "console-cartridge-contract",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A pattern for pluggable Node architecture",
   "main": "dist/index.js",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "axios": "^0.26.0",
+    "dot-env": "^0.0.1",
+    "fast-xml-parser": "^4.0.11",
     "http-errors": "^2.0.0",
     "http-status-codes": "^2.2.0",
     "lodash": "^4.17.21",
+    "unfuxml": "^2.0.0",
     "uuid": "^8.3.2",
     "yargs": "^17.5.1",
     "zod": "^3.17.3"
@@ -41,12 +44,14 @@
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
+    "build:dist": "yarn clean && yarn lint && tsc --project tsconfig.dist.json",
     "build": "yarn lint && tsc",
     "clean:reset": "rm -rf node_modules && yarn",
     "clean": "rm -rf dist",
     "format": "prettier --check ./src/**",
     "format:fix": "prettier --write ./src/**",
     "lint:fix": "eslint --fix './src/**/*.ts'",
+    "fix": "yarn run format:fix && yarn run lint:fix",
     "lint": "eslint './src/**/*.ts'",
     "test": "jest -i",
     "test:noc": "jest -i --collectCoverage=false"
