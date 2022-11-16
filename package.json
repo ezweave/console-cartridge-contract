@@ -4,7 +4,7 @@
   "description": "A pattern for pluggable Node architecture",
   "main": "dist/index.js",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
     "axios": "^0.26.0",
     "dot-env": "^0.0.1",
