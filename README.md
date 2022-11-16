@@ -13,7 +13,10 @@ A design pattern to help separate implemenation details from execution.
 - [Is It A Design Pattern](#is-it-a-design-pattern)
 - [Lexicon](#lexicon)
   - [Cartridge](#cartridge)
+    - [Example](#example-cartridge)
+    - [Counter Example](#cartridge-counter-example)
   - [Console](#console)
+- [A Utility To Make Life Easier](#a-utility-to-make-life-easier)
 
 ## Introduction
 
@@ -455,7 +458,7 @@ It has _one_ operation that simply exercises a `Cartridge`. This may be all that
 
 You probably also notice that there's _one_ function that is about as much framework/middleware as we're willing to offer, `buildStepsFunction`.
 
-### A Tiny Bit of Framework
+### A Utility To Make Life Easier
 
 This module is intended to provide you with very little code or middleware. The point is not to enforce a style or toolset. There's much subjectivity in the Node/ECMAScript/JS world and this is not intended to say anything about how you write code, which libraries you use, _et cetera_.
 
