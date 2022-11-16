@@ -1,10 +1,13 @@
-import { flow, forEach, head, isEmpty, map, reduce, tail } from 'lodash';
+import { head, isEmpty, map, tail } from 'lodash';
 
 import { Operation, Logger } from '@console-cartridge-contract/types';
 
 type STEP_TYPE = 'operation' | 'request-transformer' | 'response-transformer';
 
-const logStep = (log: Logger, operationName: any, n: number) => (stepType: STEP_TYPE, description: string, ...args: any[]) => log(`${operationName}-step-${n}-${stepType}`, description, ...args);
+const logStep =
+  (log: Logger, operationName: any, n: number) =>
+  (stepType: STEP_TYPE, description: string, ...args: any[]) =>
+    log(`${operationName}-step-${n}-${stepType}`, description, ...args);
 
 export const buildStepFunctionsFromOperation = (
   op: Operation<any, any, any, any>,
@@ -40,10 +43,13 @@ export const buildStepFunctionsFromOperation = (
   });
 };
 interface IPromise {
-  (...args: any[]): Promise<any>
+  (...args: any[]): Promise<any>;
 }
 
-export const mapSeries = async (functions: IPromise[], ...input: any[]) => {
+export const mapSeries = async <T extends any>(
+  functions: IPromise[],
+  ...input: any[]
+) => {
   const currentFunction = head(functions);
   if (currentFunction) {
     const remainingFunctions = tail(functions);
@@ -51,16 +57,17 @@ export const mapSeries = async (functions: IPromise[], ...input: any[]) => {
     if (!isEmpty(remainingFunctions)) {
       return mapSeries(remainingFunctions, response);
     }
-    return response;
+    return response as T;
   }
-  return input;
-}
-
-export const buildStepsFunction = <InputType, OutputType>(
-  op: Operation<InputType, any, any, OutputType>,
-  log: Logger = console.info,
-): ((input?: InputType) => Promise<OutputType>) => async (input: InputType | undefined) => {
-  const stepFunctions = buildStepFunctionsFromOperation(op, log);
-  return mapSeries(stepFunctions, input);
+  return input as T;
 };
 
+export const buildStepsFunction =
+  <InputType, OutputType>(
+    op: Operation<InputType, any, any, OutputType>,
+    log: Logger = console.info,
+  ): ((input?: InputType) => Promise<OutputType>) =>
+  async (input: InputType | undefined) => {
+    const stepFunctions = buildStepFunctionsFromOperation(op, log);
+    return mapSeries(stepFunctions, input);
+  };

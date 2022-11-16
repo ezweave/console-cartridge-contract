@@ -14,8 +14,6 @@ A design pattern to help separate implemenation details from execution.
 - [Lexicon](#lexicon)
   - [Cartridge](#cartridge)
   - [Console](#console)
-- [Benefits](#benefits)
-- [Drawbacks](#drawbacks)
 
 ## Introduction
 
@@ -459,12 +457,82 @@ You probably also notice that there's _one_ function that is about as much frame
 
 ### A Tiny Bit of Framework
 
-[Top](#table-of-contents)
+This module is intended to provide you with very little code or middleware. The point is not to enforce a style or toolset. There's much subjectivity in the Node/ECMAScript/JS world and this is not intended to say anything about how you write code, which libraries you use, _et cetera_.
 
-## Benefits
+However, there is one function we provide, that can coalesce your operation (transformers, and so on) into one function.
 
-[Top](#table-of-contents)
+That is `buildStepsFunction`.
 
-## Drawbacks
+This function takes in an `Operation` and gives you back one function that will execute the IO and any transformers or other steps in one `async` (`Promise` wrapped) function.
+
+Let's look at an example.
+
+We have a `Cartridge` that gets a Ninja Turtles information from some "remote" API:
+
+```ts
+const getNinjaTurtleInfo: Operation<NinjaTurtle, any, any, NinjaTurtle> = {
+  name: 'transformerOperation',
+  steps: [
+    {
+      operation: getWeaponFromAPI,
+      transform: {
+        request: (bandMember: NinjaTurtle) => JSON.stringify(bandMember),
+        response: ({ data }: ExampleIOResponse) => JSON.parse(data),
+      },
+    },
+    {
+      operation: getVocalsFromAPI,
+      transform: {
+        request: (bandMember: NinjaTurtle) => JSON.stringify(bandMember),
+        response: ({ data }: ExampleIOResponse) => JSON.parse(data),
+      },
+    },
+  ],
+};
+```
+
+The `operation`s don't actually do IO, but mimic functions that would (e.g. they are `Promise` based). Let's pretend that they actually hit some master "Ninja Turtle" API somwhere (TMNTAPI).
+
+While we could programmatically write code that would call the `request` `transformer`, make the request, then `transform` the `response`, this is pretty straightforard and we might as well... use our tool!
+
+In our Jest test, this looks like this:
+
+```ts
+const stepsFunction = buildStepsFunction(getNinjaTurtleInfo);
+expect(
+  await stepsFunction({
+    name: 'Donatello',
+  }),
+).toMatchSnapshot();
+```
+
+The output of this function is:
+
+```json
+{
+  "color": "PURPLE",
+  "name": "Donatello",
+  "weapon": "BO"
+}
+```
+
+If you add the optional `logger` to the function we see each step (_NOTE: our transformers are trivial and just use `JSON.stringify` so the output is doing some string interpolation_):
+
+1. `getNinjaTurtleInfo-step-1-request-transformer input { name: 'Donatello' }`
+1. `getNinjaTurtleInfo-step-1-request-transformer output {"name":"Donatello"}`
+1. `getNinjaTurtleInfo-step-1-operation input { name: 'Donatello' }`
+1. `getNinjaTurtleInfo-step-1-operation output { data: '{"name":"Donatello","weapon":"BO"}' }`
+1. `getNinjaTurtleInfo-step-1-response-transformer input { data: '{"name":"Donatello","weapon":"BO"}' }`
+1. `getNinjaTurtleInfo-step-1-response-transformer output { name: 'Donatello', weapon: 'BO' }`
+1. `getNinjaTurtleInfo-step-2-request-transformer input { name: 'Donatello', weapon: 'BO' }`
+1. `getNinjaTurtleInfo-step-2-request-transformer output {"name":"Donatello","weapon":"BO"}`
+1. `getNinjaTurtleInfo-step-2-operation input { name: 'Donatello', weapon: 'BO' }`
+1. `getNinjaTurtleInfo-step-2-operation output { data: '{"name":"Donatello","weapon":"BO","color":"PURPLE"}' }`
+1. `getNinjaTurtleInfo-step-2-response-transformer input { data: '{"name":"Donatello","weapon":"BO","color":"PURPLE"}' }`
+1. `getNinjaTurtleInfo-step-2-response-transformer output { name: 'Donatello', weapon: 'BO', color: 'PURPLE' }`
+
+We can see that the `stepFunction` starts with passing the intial input to a `request` transformer, which transformers the data and then... goes down the line in order. With our logging we get a clear idea of where we are in execution, so that if we see an error or defect introduced, we have a very clear idea of where the error was introduced.
+
+This is provided solely to provide an easy way to combine your operations, it is obviously not the only way you can use the `Cartridge` concept.
 
 [Top](#table-of-contents)

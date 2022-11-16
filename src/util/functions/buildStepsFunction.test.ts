@@ -1,4 +1,4 @@
-import { Function1, get, join, map, toLower, toUpper } from 'lodash';
+import { get, join, map, toUpper } from 'lodash';
 
 import { Operation } from '@console-cartridge-contract/types';
 
@@ -17,108 +17,114 @@ const transformerlessTestOperation: Operation<string, any, any, string> = {
   ],
 };
 
-enum Instrument {
-  BASS = 'BASS',
-  LEAD_GUITAR = 'LEAD_GUITAR',
-  RHYTHM_GUITAR = 'RHYTHM_GUITAR',
-  DRUMS = 'DRUMS',
-  NONE = 'NONE'
+enum Weapon {
+  NUNCHUCKS = 'NUNCHUCKS',
+  SAI = 'SAI',
+  KATANA = 'KATANA',
+  BO = 'BO',
 }
 
-enum Vocals {
-  LEAD = 'LEAD',
-  BACKGROUND = 'BACKGROUND',
-  RINGO = 'RINGO',
-  NONE = 'NONE'
+enum Color {
+  BLUE = 'BLUE',
+  PURPLE = 'PURPLE',
+  RED = 'RED',
+  ORANGE = 'ORANGE',
 }
 
-interface BandMember {
-  name: string,
-  notes?: string,
-  instrument?: Instrument,
-  vocals?: Vocals,
+enum TurtleName {
+  LEONARDO = 'LEONARDO',
+  DONATELLO = 'DONATELLO',
+  RAPHAEL = 'RAPHAEL',
+  MICHAELANGELO = 'MICHAELANGELO',
+}
+
+interface NinjaTurtle {
+  name: string;
+  notes?: string;
+  weapon?: Weapon;
+  color?: Color;
 }
 
 interface ExampleIOResponse {
-  data: any,
+  data: any;
 }
 
 /**
- * Mock a call to a system that finds a Beatles instrument.
- * 
- * @param n 
- * @returns 
+ * Mock a call to a system that finds a Ninja Turtle's weapon.
+ *
+ * @param n
+ * @returns
  */
-const getInstrumentFromAPI = async (n: string) => {
-  const bandMember = JSON.parse(n);
-  const name = get(bandMember, 'name');
+const getWeaponFromAPI = async (n: string) => {
+  const ninjaTurtle = JSON.parse(n);
+  const name = get(ninjaTurtle, 'name');
 
-  const buildResponse = (instrument: Instrument) => ({
+  const buildResponse = (weapon: Weapon) => ({
     data: JSON.stringify({
-      ...bandMember,
-      instrument
-    })
+      ...ninjaTurtle,
+      weapon,
+    }),
   });
 
   switch (toUpper(name)) {
-    case 'JOHN':
-      return buildResponse(Instrument.RHYTHM_GUITAR);
-    case 'GEORGE':
-      return buildResponse(Instrument.LEAD_GUITAR);
-    case 'PAUL':
-      return buildResponse(Instrument.BASS);
-    case 'RINGO':
-      return buildResponse(Instrument.DRUMS);
+    case TurtleName.DONATELLO:
+      return buildResponse(Weapon.BO);
+    case TurtleName.LEONARDO:
+      return buildResponse(Weapon.KATANA);
+    case TurtleName.MICHAELANGELO:
+      return buildResponse(Weapon.NUNCHUCKS);
+    case TurtleName.RAPHAEL:
+      return buildResponse(Weapon.SAI);
     default:
-      throw new Error(`${name} is not a Beatle!`);
+      throw new Error(`${name} is not a Ninja Turtle!`);
   }
-}
+};
 
 /**
- * Mock a call to a system that finds a Beatles vocals.
- * 
- * @param n 
- * @returns 
+ * Mock a call to a system that finds Ninja Turtle's colors.
+ *
+ * @param n
+ * @returns
  */
 const getVocalsFromAPI = async (n: string) => {
-  const bandMember = JSON.parse(n);
-  const name = get(bandMember, 'name');
+  const ninjaTurtle = JSON.parse(n);
+  const name = get(ninjaTurtle, 'name');
 
-  const buildResponse = (vocals: Vocals) => ({
+  const buildResponse = (color: Color) => ({
     data: JSON.stringify({
-      ...bandMember,
-      vocals
-    })
+      ...ninjaTurtle,
+      color,
+    }),
   });
 
   switch (toUpper(name)) {
-    case 'JOHN':
-      return buildResponse(Vocals.LEAD);
-    case 'GEORGE':
-      return buildResponse(Vocals.BACKGROUND);
-    case 'PAUL':
-      return buildResponse(Vocals.LEAD);
-    case 'RINGO':
-      return buildResponse(Vocals.RINGO);
+    case TurtleName.DONATELLO:
+      return buildResponse(Color.PURPLE);
+    case TurtleName.LEONARDO:
+      return buildResponse(Color.BLUE);
+    case TurtleName.MICHAELANGELO:
+      return buildResponse(Color.ORANGE);
+    case TurtleName.RAPHAEL:
+      return buildResponse(Color.RED);
     default:
-      throw new Error(`${name} is not a Beatle!`);
+      throw new Error(`${name} is not a Ninja Turtle!`);
   }
-}
+};
 
-const testOperation: Operation<BandMember, any, any, BandMember> = {
-  name: 'transformerOperation',
+const getNinjaTurtleInfo: Operation<NinjaTurtle, any, any, NinjaTurtle> = {
+  name: 'getNinjaTurtleInfo',
   steps: [
     {
-      operation: getInstrumentFromAPI,
+      operation: getWeaponFromAPI,
       transform: {
-        request: (bandMember: BandMember) => JSON.stringify(bandMember),
+        request: (ninjaTurtle: NinjaTurtle) => JSON.stringify(ninjaTurtle),
         response: ({ data }: ExampleIOResponse) => JSON.parse(data),
       },
     },
     {
       operation: getVocalsFromAPI,
       transform: {
-        request: (bandMember: BandMember) => JSON.stringify(bandMember),
+        request: (ninjaTurtle: NinjaTurtle) => JSON.stringify(ninjaTurtle),
         response: ({ data }: ExampleIOResponse) => JSON.parse(data),
       },
     },
@@ -132,7 +138,9 @@ describe(buildStepFunctionsFromOperation, () => {
     ).toMatchSnapshot();
   });
   it('builds step functions with transformers', async () => {
-    expect(buildStepFunctionsFromOperation(testOperation)).toMatchSnapshot();
+    expect(
+      buildStepFunctionsFromOperation(getNinjaTurtleInfo),
+    ).toMatchSnapshot();
   });
 });
 
@@ -143,21 +151,23 @@ describe(mapSeries, () => {
       async (n) => `${n}_2`,
       async (n) => `${n}_3`,
     ];
-    expect(await mapSeries(mockStepFunctions, 'input')).toEqual('input_1_2_3')
-  })
+    expect(await mapSeries(mockStepFunctions, 'input')).toEqual('input_1_2_3');
+  });
   it('executes non-heterogeneous functions in series', async () => {
     const mockStepFunctions = [
-      async (n: string[], toUpperCase: boolean) => toUpperCase ? map(n, toUpper) : n,
+      async (n: string[], toUpperCase: boolean) =>
+        toUpperCase ? map(n, toUpper) : n,
       async (n: string[]) => join(n, ','),
     ];
-    expect(await mapSeries(mockStepFunctions, [
-      'John',
-      'George',
-      'Paul',
-      'Ringo'
-    ], true)).toEqual('JOHN,GEORGE,PAUL,RINGO');
-  })
-})
+    expect(
+      await mapSeries(
+        mockStepFunctions,
+        ['Donatello', 'Leonardo', 'Michaelangelo', 'Rafael'],
+        true,
+      ),
+    ).toEqual('DONATELLO,LEONARDO,MICHAELANGELO,RAFAEL');
+  });
+});
 
 describe(buildStepsFunction, () => {
   it('compiles multiple steps without transformers into one function', async () => {
@@ -165,16 +175,18 @@ describe(buildStepsFunction, () => {
     expect(await stepsFunction('foo')).toEqual('FOO');
   });
   it('compiles multiple steps with transformers into one function', async () => {
-    const stepsFunction = buildStepsFunction(testOperation);
-    expect(await stepsFunction({
-      name: 'George'
-    })).toMatchSnapshot();
+    const stepsFunction = buildStepsFunction(getNinjaTurtleInfo);
+    expect(
+      await stepsFunction({
+        name: 'Donatello',
+      }),
+    ).toMatchSnapshot();
   });
   it('logs all of the steps along the way', async () => {
     const log = jest.fn();
-    const stepsFunction = buildStepsFunction(testOperation, log);
+    const stepsFunction = buildStepsFunction(getNinjaTurtleInfo, log);
     await stepsFunction({
-      name: 'Ringo'
+      name: 'Michaelangelo',
     });
     expect(log.mock.calls).toMatchSnapshot();
   });

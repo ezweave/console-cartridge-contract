@@ -15,97 +15,97 @@ Array [
 
 exports[`buildStepsFunction compiles multiple steps with transformers into one function 1`] = `
 Object {
-  "instrument": "LEAD_GUITAR",
-  "name": "George",
-  "vocals": "BACKGROUND",
+  "color": "PURPLE",
+  "name": "Donatello",
+  "weapon": "BO",
 }
 `;
 
 exports[`buildStepsFunction logs all of the steps along the way 1`] = `
 Array [
   Array [
-    "transformerOperation-step-1-request-transformer",
+    "getNinjaTurtleInfo-step-1-request-transformer",
     "input",
     Object {
-      "name": "Ringo",
+      "name": "Michaelangelo",
     },
   ],
   Array [
-    "transformerOperation-step-1-request-transformer",
+    "getNinjaTurtleInfo-step-1-request-transformer",
     "output",
-    "{\\"name\\":\\"Ringo\\"}",
+    "{\\"name\\":\\"Michaelangelo\\"}",
   ],
   Array [
-    "transformerOperation-step-1-operation",
+    "getNinjaTurtleInfo-step-1-operation",
     "input",
     Object {
-      "name": "Ringo",
+      "name": "Michaelangelo",
     },
   ],
   Array [
-    "transformerOperation-step-1-operation",
+    "getNinjaTurtleInfo-step-1-operation",
     "output",
     Object {
-      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\"}",
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\"}",
     },
   ],
   Array [
-    "transformerOperation-step-1-response-transformer",
+    "getNinjaTurtleInfo-step-1-response-transformer",
     "input",
     Object {
-      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\"}",
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\"}",
     },
   ],
   Array [
-    "transformerOperation-step-1-response-transformer",
+    "getNinjaTurtleInfo-step-1-response-transformer",
     "output",
     Object {
-      "instrument": "DRUMS",
-      "name": "Ringo",
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
     },
   ],
   Array [
-    "transformerOperation-step-2-request-transformer",
+    "getNinjaTurtleInfo-step-2-request-transformer",
     "input",
     Object {
-      "instrument": "DRUMS",
-      "name": "Ringo",
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
     },
   ],
   Array [
-    "transformerOperation-step-2-request-transformer",
+    "getNinjaTurtleInfo-step-2-request-transformer",
     "output",
-    "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\"}",
+    "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\"}",
   ],
   Array [
-    "transformerOperation-step-2-operation",
+    "getNinjaTurtleInfo-step-2-operation",
     "input",
     Object {
-      "instrument": "DRUMS",
-      "name": "Ringo",
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
     },
   ],
   Array [
-    "transformerOperation-step-2-operation",
+    "getNinjaTurtleInfo-step-2-operation",
     "output",
     Object {
-      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\",\\"vocals\\":\\"RINGO\\"}",
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\",\\"color\\":\\"ORANGE\\"}",
     },
   ],
   Array [
-    "transformerOperation-step-2-response-transformer",
+    "getNinjaTurtleInfo-step-2-response-transformer",
     "input",
     Object {
-      "data": "{\\"name\\":\\"Ringo\\",\\"instrument\\":\\"DRUMS\\",\\"vocals\\":\\"RINGO\\"}",
+      "data": "{\\"name\\":\\"Michaelangelo\\",\\"weapon\\":\\"NUNCHUCKS\\",\\"color\\":\\"ORANGE\\"}",
     },
   ],
   Array [
-    "transformerOperation-step-2-response-transformer",
+    "getNinjaTurtleInfo-step-2-response-transformer",
     "output",
     Object {
-      "instrument": "DRUMS",
-      "name": "Ringo",
-      "vocals": "RINGO",
+      "color": "ORANGE",
+      "name": "Michaelangelo",
+      "weapon": "NUNCHUCKS",
     },
   ],
 ]
