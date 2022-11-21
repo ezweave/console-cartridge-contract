@@ -86,7 +86,7 @@ const getWeaponFromAPI = async (n: string) => {
  * @param n
  * @returns
  */
-const getVocalsFromAPI = async (n: string) => {
+const getColorFromAPI = async (n: string) => {
   const ninjaTurtle = JSON.parse(n);
   const name = get(ninjaTurtle, 'name');
 
@@ -122,7 +122,7 @@ const getNinjaTurtleInfo: Operation<NinjaTurtle, any, any, NinjaTurtle> = {
       },
     },
     {
-      operation: getVocalsFromAPI,
+      operation: getColorFromAPI,
       transform: {
         request: (ninjaTurtle: NinjaTurtle) => JSON.stringify(ninjaTurtle),
         response: ({ data }: ExampleIOResponse) => JSON.parse(data),
