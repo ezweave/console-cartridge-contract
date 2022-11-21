@@ -484,7 +484,7 @@ const getNinjaTurtleInfo: Operation<NinjaTurtle, any, any, NinjaTurtle> = {
       },
     },
     {
-      operation: getVocalsFromAPI,
+      operation: getColorFromAPI,
       transform: {
         request: (bandMember: NinjaTurtle) => JSON.stringify(bandMember),
         response: ({ data }: ExampleIOResponse) => JSON.parse(data),
