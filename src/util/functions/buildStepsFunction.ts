@@ -6,8 +6,8 @@ type STEP_TYPE = 'operation' | 'request-transformer' | 'response-transformer';
 
 const logStep =
   (log: Logger, operationName: any, n: number) =>
-    (stepType: STEP_TYPE, description: string, ...args: any[]) =>
-      log(`${operationName}-step-${n}-${stepType}`, description, ...args);
+  (stepType: STEP_TYPE, description: string, ...args: any[]) =>
+    log(`${operationName}-step-${n}-${stepType}`, description, ...args);
 
 export const buildStepFunctionsFromOperation = (
   op: Operation<any, any>,
@@ -67,7 +67,7 @@ export const buildStepsFunction =
     op: Operation<InputType, OutputType>,
     log: Logger = console.info,
   ): ((input?: InputType) => Promise<OutputType>) =>
-    async (input: InputType | undefined) => {
-      const stepFunctions = buildStepFunctionsFromOperation(op, log);
-      return mapSeries(stepFunctions, input);
-    };
+  async (input: InputType | undefined) => {
+    const stepFunctions = buildStepFunctionsFromOperation(op, log);
+    return mapSeries(stepFunctions, input);
+  };

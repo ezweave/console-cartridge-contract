@@ -29,7 +29,7 @@ const purchaseOperation: PurchaseOperation = {
     {
       operation: async (_data: string) => '',
       transform: {
-        request: (_n: any[]) => '',
+        request: (_request) => '',
         response: (_n: string) => ({
           id: 'our-trace-id',
           total: '2026.72',

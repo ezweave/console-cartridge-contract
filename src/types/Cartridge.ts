@@ -3,6 +3,6 @@ import { Operation } from './Operation';
 
 export interface Cartridge {
   name: string;
-  operations: Operation<unknown, unknown, unknown, unknown>[];
+  operations: Operation<any, any>[];
   logger: Logger;
 }

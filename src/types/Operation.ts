@@ -17,14 +17,15 @@ interface IOWithTransformation<InputType, OutputType, RequestType, ResponseType>
 //   | IOWithTransformation<InputType, OutputType, RequestType, ResponseType>
 //   | IOWithoutTransformation<InputType, OutputType>;
 interface BaseOperation {
-  name: string
+  name: string;
 }
 
 export interface OneStepOperation<
   InputType,
   RequestType,
   ResponseType,
-  OutputType> extends BaseOperation {
+  OutputType,
+> extends BaseOperation {
   steps: [
     IOWithTransformation<InputType, OutputType, RequestType, ResponseType>,
   ];
@@ -37,7 +38,7 @@ export interface TwoStepOperation<
   OutputType1,
   RequestType2,
   ResponseType2,
-  OutputType2
+  OutputType2,
 > extends BaseOperation {
   steps: [
     IOWithTransformation<InputType1, OutputType1, RequestType1, ResponseType1>,
@@ -55,7 +56,7 @@ export interface ThreeStepOperation<
   OutputType2,
   RequestType3,
   ResponseType3,
-  OutputType3
+  OutputType3,
 > extends BaseOperation {
   steps: [
     IOWithTransformation<InputType1, OutputType1, RequestType1, ResponseType1>,
@@ -77,7 +78,7 @@ export interface FourStepOperation<
   OutputType3,
   RequestType4,
   ResponseType4,
-  OutputType4
+  OutputType4,
 > extends BaseOperation {
   steps: [
     IOWithTransformation<InputType1, OutputType1, RequestType1, ResponseType1>,
@@ -103,7 +104,7 @@ export interface FiveStepOperation<
   OutputType4,
   RequestType5,
   ResponseType5,
-  OutputType5
+  OutputType5,
 > extends BaseOperation {
   steps: [
     IOWithTransformation<InputType1, OutputType1, RequestType1, ResponseType1>,
@@ -132,7 +133,7 @@ export interface SixStepOperation<
   OutputType5,
   RequestType6,
   ResponseType6,
-  OutputType6
+  OutputType6,
 > extends BaseOperation {
   steps: [
     IOWithTransformation<InputType1, OutputType1, RequestType1, ResponseType1>,
@@ -165,7 +166,7 @@ export interface SevenStepOperation<
   OutputType6,
   RequestType7,
   ResponseType7,
-  OutputType7
+  OutputType7,
 > extends BaseOperation {
   steps: [
     IOWithTransformation<InputType1, OutputType1, RequestType1, ResponseType1>,
@@ -179,14 +180,14 @@ export interface SevenStepOperation<
 }
 
 export interface Operation<InputType, OutputType> extends BaseOperation {
-  steps: [
-    IOWithTransformation<InputType, unknown, unknown, unknown>,
-    ...IOWithTransformation<unknown, unknown, unknown, unknown>[],
-    IOWithTransformation<unknown, OutputType, unknown, unknown>
-  ] | [
-    IOWithTransformation<InputType, unknown, unknown, unknown>,
-    IOWithTransformation<unknown, OutputType, unknown, unknown>
-  ] | [
-    IOWithTransformation<InputType, OutputType, unknown, unknown>
-  ]
+  steps: // [
+  //   IOWithTransformation<InputType, any, any, any>,
+  //   ...IOWithTransformation<any, any, any, any>[],
+  //   IOWithTransformation<any, OutputType, any, any>,
+  // ]
+  | [
+        IOWithTransformation<InputType, any, any, any>,
+        IOWithTransformation<any, OutputType, any, any>,
+      ]
+    | [IOWithTransformation<InputType, OutputType, any, any>];
 }
