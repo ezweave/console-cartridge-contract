@@ -180,12 +180,13 @@ export interface SevenStepOperation<
 }
 
 export interface Operation<InputType, OutputType> extends BaseOperation {
-  steps: // [
-  //   IOWithTransformation<InputType, any, any, any>,
-  //   ...IOWithTransformation<any, any, any, any>[],
-  //   IOWithTransformation<any, OutputType, any, any>,
-  // ]
-  | [
+  steps:
+    | [
+        IOWithTransformation<InputType, any, any, any>,
+        ...IOWithTransformation<any, any, any, any>[],
+        IOWithTransformation<any, OutputType, any, any>,
+      ]
+    | [
         IOWithTransformation<InputType, any, any, any>,
         IOWithTransformation<any, OutputType, any, any>,
       ]
