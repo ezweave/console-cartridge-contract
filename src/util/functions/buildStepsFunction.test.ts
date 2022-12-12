@@ -8,7 +8,7 @@ import {
   mapSeries,
 } from './buildStepsFunction';
 
-const transformerlessTestOperation: Operation<string, any, any, string> = {
+const transformerlessTestOperation: Operation<string, string> = {
   name: 'transformerlessOperation',
   steps: [
     {
@@ -43,6 +43,12 @@ interface NinjaTurtle {
   notes?: string;
   weapon?: Weapon;
   color?: Color;
+}
+
+interface CompleteNinjaTurtle extends NinjaTurtle {
+  notes: string;
+  weapon: Weapon;
+  color: Color;
 }
 
 interface ExampleIOResponse {
@@ -111,7 +117,28 @@ const getColorFromAPI = async (n: string) => {
   }
 };
 
-const getNinjaTurtleInfo: Operation<NinjaTurtle, any, any, NinjaTurtle> = {
+interface GetNinjaTurtleInfo
+  extends Operation<NinjaTurtle, CompleteNinjaTurtle> {
+  name: 'getNinjaTurtleInfo';
+  steps: [
+    {
+      operation: (transformedRequest: string) => Promise<ExampleIOResponse>;
+      transform: {
+        request: (ninjaTurtle: NinjaTurtle) => string;
+        response: (response: ExampleIOResponse) => NinjaTurtle;
+      };
+    },
+    {
+      operation: (transformedRequest: string) => Promise<ExampleIOResponse>;
+      transform: {
+        request: (ninjaTurtle: NinjaTurtle) => string;
+        response: (response: ExampleIOResponse) => CompleteNinjaTurtle;
+      };
+    },
+  ];
+}
+
+const getNinjaTurtleInfo: GetNinjaTurtleInfo = {
   name: 'getNinjaTurtleInfo',
   steps: [
     {

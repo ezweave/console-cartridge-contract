@@ -200,14 +200,14 @@ The two key pieces here are the `operations`.
 
 ```ts
 export interface OffersOperation
-  extends Operation<any, string, string, PetShopInventoryItem[]> {
+  extends Operation<string, PetShopInventoryItem[]> {
   name: 'OffersOperation';
   steps: [
     {
-      operation: (string) => Promise<string>;
+      operation: (transformedRequest: string) => Promise<string>;
       transform: {
-        request: (n) => string;
-        response: (n) => PetShopInventoryItem[];
+        request: (request: string) => string;
+        response: (response: string) => PetShopInventoryItem[];
       };
     },
   ];
@@ -473,20 +473,41 @@ Let's look at an example.
 We have a `Cartridge` that gets a Ninja Turtles information from some "remote" API:
 
 ```ts
-const getNinjaTurtleInfo: Operation<NinjaTurtle, any, any, NinjaTurtle> = {
-  name: 'transformerOperation',
+interface GetNinjaTurtleInfo
+  extends Operation<NinjaTurtle, CompleteNinjaTurtle> {
+  name: 'getNinjaTurtleInfo';
+  steps: [
+    {
+      operation: (transformedRequest: string) => Promise<ExampleIOResponse>;
+      transform: {
+        request: (ninjaTurtle: NinjaTurtle) => string;
+        response: (response: ExampleIOResponse) => NinjaTurtle;
+      };
+    },
+    {
+      operation: (transformedRequest: string) => Promise<ExampleIOResponse>;
+      transform: {
+        request: (ninjaTurtle: NinjaTurtle) => string;
+        response: (response: ExampleIOResponse) => CompleteNinjaTurtle;
+      };
+    },
+  ];
+}
+
+const getNinjaTurtleInfo: GetNinjaTurtleInfo = {
+  name: 'getNinjaTurtleInfo',
   steps: [
     {
       operation: getWeaponFromAPI,
       transform: {
-        request: (bandMember: NinjaTurtle) => JSON.stringify(bandMember),
+        request: (ninjaTurtle: NinjaTurtle) => JSON.stringify(ninjaTurtle),
         response: ({ data }: ExampleIOResponse) => JSON.parse(data),
       },
     },
     {
       operation: getColorFromAPI,
       transform: {
-        request: (bandMember: NinjaTurtle) => JSON.stringify(bandMember),
+        request: (ninjaTurtle: NinjaTurtle) => JSON.stringify(ninjaTurtle),
         response: ({ data }: ExampleIOResponse) => JSON.parse(data),
       },
     },

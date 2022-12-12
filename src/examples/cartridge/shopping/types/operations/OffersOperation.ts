@@ -1,16 +1,16 @@
 import { Operation } from '@console-cartridge-contract/types';
 
-import { PetShopInventoryItem } from '../data';
+import { PetShopCategory, PetShopInventoryItem } from '../data';
 
 export interface OffersOperation
-  extends Operation<any, string, string, PetShopInventoryItem[]> {
+  extends Operation<PetShopCategory, PetShopInventoryItem[]> {
   name: 'OffersOperation';
   steps: [
     {
-      operation: (string) => Promise<string>;
+      operation: (transformedRequest: string) => Promise<string>;
       transform: {
-        request: (n) => string;
-        response: (n) => PetShopInventoryItem[];
+        request: (request: PetShopCategory) => string;
+        response: (response: string) => PetShopInventoryItem[];
       };
     },
   ];
