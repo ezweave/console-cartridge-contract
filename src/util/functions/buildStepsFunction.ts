@@ -6,11 +6,11 @@ type STEP_TYPE = 'operation' | 'request-transformer' | 'response-transformer';
 
 const logStep =
   (log: Logger, operationName: any, n: number) =>
-  (stepType: STEP_TYPE, description: string, ...args: any[]) =>
-    log(`${operationName}-step-${n}-${stepType}`, description, ...args);
+    (stepType: STEP_TYPE, description: string, ...args: any[]) =>
+      log(`${operationName}-step-${n}-${stepType}`, description, ...args);
 
 export const buildStepFunctionsFromOperation = (
-  op: Operation<any, any, any, any>,
+  op: Operation<any, any>,
   logger: Logger = console.info,
 ) => {
   let count = 1;
@@ -64,10 +64,10 @@ export const mapSeries = async <T extends any>(
 
 export const buildStepsFunction =
   <InputType, OutputType>(
-    op: Operation<InputType, any, any, OutputType>,
+    op: Operation<InputType, OutputType>,
     log: Logger = console.info,
   ): ((input?: InputType) => Promise<OutputType>) =>
-  async (input: InputType | undefined) => {
-    const stepFunctions = buildStepFunctionsFromOperation(op, log);
-    return mapSeries(stepFunctions, input);
-  };
+    async (input: InputType | undefined) => {
+      const stepFunctions = buildStepFunctionsFromOperation(op, log);
+      return mapSeries(stepFunctions, input);
+    };
