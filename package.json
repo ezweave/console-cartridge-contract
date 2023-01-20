@@ -1,6 +1,6 @@
 {
   "name": "console-cartridge-contract",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A pattern for pluggable Node architecture",
   "main": "dist/index.js",
   "license": "MIT",
