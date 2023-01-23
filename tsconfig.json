@@ -3,26 +3,27 @@
   "display": "Default",
   "compilerOptions": {
     "baseUrl": "./src",
+    "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
-    "strict": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "types": ["node", "jest"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "outDir": "dist",
     "paths": {
       "@console-cartridge-contract/*": ["*"]
     },
+    "preserveConstEnums": true,
+    "removeComments": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "moduleResolution": "node",
-    "lib": ["ES2019"],
-    "module": "commonjs",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "sourceRoot": "dist",
+    "strict": true,
     "target": "ES2019",
-    "declarationMap": true,
-    "noImplicitAny": false,
-    "outDir": "dist"
+    "types": ["node", "jest"]
   },
+  "lib": ["ES2019"],
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist", ".eslintrc.js"]
+  "exclude": ["node_modules", "dist"]
 }
